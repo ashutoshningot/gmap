@@ -1,0 +1,233 @@
+<h1>Angular Ashu Google Maps for test</h1>
+
+<!-- <agm-map [latitude]="sourceMarker.lat" [longitude]="sourceMarker.lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" > -->
+  <!-- <h1>Source</h1>
+  <div class="form-group">
+    <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()"
+      placeholder="Search Source Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text"
+      #sourceSearch>
+  </div> -->
+
+  <!-- <h1>Destination</h1>
+  <div class="form-group">
+    <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()"
+      placeholder="Search Destination Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text"
+      #destinationSearch>
+  </div> -->
+
+  <!-- <agm-map [latitude]="sourceMarker.lat" [longitude]="sourceMarker.lng" [scrollwheel]="false" [zoom]="zoom">
+    <agm-marker [latitude]="sourceMarker.lat" [longitude]="sourceMarker.lng"></agm-marker>
+  </agm-map> -->
+  
+<agm-map [latitude]="sourceMarker.lat" [longitude]="sourceMarker.lng" [zoom]="zoom" [scrollwheel]="true" [disableDefaultUI]="false"
+  [zoomControl]="true">
+
+  <agm-marker *ngIf="isSourcePresent" (markerClick)="clickedMarker(sourceMarker.label)" [latitude]="sourceMarker.lat"
+    [longitude]="sourceMarker.lng" [label]="sourceMarker.label" [markerDraggable]="sourceMarker.draggable"
+    (dragEnd)="markerDragEnd(sourceMarker, $event)">
+    <agm-info-window><strong>Source</strong></agm-info-window>
+  </agm-marker>
+
+  <agm-marker *ngIf="isDestinationPresent" (markerClick)="clickedMarker(destinationMarker.label)"
+    [latitude]="destinationMarker.lat" [longitude]="destinationMarker.lng" [label]="destinationMarker.label"
+    [markerDraggable]="destinationMarker.draggable" (dragEnd)="markerDragEnd(destinationMarker, $event)">
+  <agm-info-window><strong>Destinaion</strong></agm-info-window>
+  </agm-marker>
+<!-- 
+  <agm-direction *ngIf="isGetDirection" [origin]="sourceMarker" [destination]="destinationMarker">
+  </agm-direction> -->
+
+  <agm-direction *ngIf="isGetDirection" [origin]="dir.origin" [destination]="dir.destination">
+  </agm-direction>
+
+</agm-map>
+
+<button type="button" (click)="getDirection()">Get</button>
+
+
+
+<div class="sc-1jh5b9t-0 dyfpSS">
+  <div class="sc-1jh5b9t-1 esElEL">
+      
+      
+      
+  </div>
+  
+  <div style="transform:translate3d(0,-0px,0);transition:transform 100ms cubic-bezier(0,0,0.15,1);" class="p0dm0g-0 bmghQq">
+<div class="CoreUIFlexContainer-wee03o-0 sc-1tcb6zi-1 lfoVKR">
+ <div class="sc-1tcb6zi-0 eisDKa"></div>
+</div>
+<div class="p0dm0g-1 eTPoYl top">
+ <div>
+    <h1 class="StyledText-cx1xxi-0 cnGJKW">Fare estimate</h1>
+    <div class="Spacer-sc-1yxs2dq-0 dBgzlX"></div>
+    <p class="StyledText-cx1xxi-0 ddwhYo">
+       Sample fares are estimates only and do not reflect variations due to discounts, traffic delays or other factors.<!-- --> <!-- --><a href="https://account.lyft.com/?next=https%3A%2F%2Fride.lyft.com%2Fridetype%3Fentrypoint%3Dlyftcom%26referrer%3Dsingular_click_id%253D0f521b6c-2a9b-4959-a800-1613da464f75%26origin%3D40.789142%252C-73.13496099999999%26originName%3DLong%2BIsland%252C%2BNew%2BYork%252C%2BUS%26destination%3D42.3387933%252C-70.9745339%26destinationName%3DBoston%2BHarbor%252C%2BBoston%252C%2BMA%252C%2BUS%26offerProductId%3Dstandard&amp;v=riderweb" color="brandInteractive" aria-label="Log in to see actual fares" class="ssqqsy-0 fvqPWA">Log in</a> <span aria-hidden="true">to see actual fares.</span>
+    </p>
+ </div>
+ <section class="sc-11wc0y8-0 cYOVSa">
+    <div class="Spacer-sc-1yxs2dq-0 dBgzlX"></div>
+    <div role="list" aria-label="Select a ride type">
+       <button id="standard-ride-button" role="option" aria-label="Select a Lyft. Price 300 to 320 dollars. " class="sc-1arawy1-0 cTmBhH">
+          <div aria-hidden="true" class="CoreUIFlexContainer-wee03o-0 ddqtFs">
+             <div class="CoreUIFlexContainer-wee03o-0 gDTYrU">
+                <img src="https://cdn.lyft.com/assets/v5/official_modes/lyft/small.png" alt="" style="width: 60px; height: 26px;">
+                <div class="CoreUIFlexContainer-wee03o-0 sc-1arawy1-1 hetUqR"><span class="StyledText-cx1xxi-0 jhMerw">Lyft</span><span class="StyledText-cx1xxi-0 ddwhYo">4 seats</span></div>
+             </div>
+             <div class="CoreUIFlexContainer-wee03o-0 sc-1arawy1-2 hFVsve"><span class="StyledText-cx1xxi-0 bdRPuj">$300 - 320</span><span class="StyledText-cx1xxi-0 dAQtDD"></span></div>
+          </div>
+       </button>
+       <button id="plus-ride-button" role="option" aria-label="Select a Lyft X L. Price 450 to 475 dollars. " class="sc-1arawy1-0 jSHAPt">
+          <div aria-hidden="true" class="CoreUIFlexContainer-wee03o-0 ddqtFs">
+             <div class="CoreUIFlexContainer-wee03o-0 gDTYrU">
+                <img src="https://cdn.lyft.com/assets/v5/official_modes/lyft_plus/small.png" alt="" style="width: 60px; height: 26px;">
+                <div class="CoreUIFlexContainer-wee03o-0 sc-1arawy1-1 hetUqR"><span class="StyledText-cx1xxi-0 jhMerw">Lyft XL</span><span class="StyledText-cx1xxi-0 ddwhYo">6 seats</span></div>
+             </div>
+             <div class="CoreUIFlexContainer-wee03o-0 sc-1arawy1-2 hFVsve"><span class="StyledText-cx1xxi-0 bdRPuj">$450 - 475</span><span class="StyledText-cx1xxi-0 dAQtDD"></span></div>
+          </div>
+       </button>
+       <button id="premium-ride-button" role="option" aria-label="Select a Lucks. Price 475 to 500 dollars. " class="sc-1arawy1-0 jSHAPt">
+          <div aria-hidden="true" class="CoreUIFlexContainer-wee03o-0 ddqtFs">
+             <div class="CoreUIFlexContainer-wee03o-0 gDTYrU">
+                <img src="https://cdn.lyft.com/assets/v5/official_modes/lyft_premier/small.png" alt="" style="width: 60px; height: 26px;">
+                <div class="CoreUIFlexContainer-wee03o-0 sc-1arawy1-1 hetUqR"><span class="StyledText-cx1xxi-0 jhMerw">Lux</span><span class="StyledText-cx1xxi-0 ddwhYo">4 seats</span></div>
+             </div>
+             <div class="CoreUIFlexContainer-wee03o-0 sc-1arawy1-2 hFVsve"><span class="StyledText-cx1xxi-0 bdRPuj">$475 - 500</span><span class="StyledText-cx1xxi-0 dAQtDD"></span></div>
+          </div>
+       </button>
+    </div>
+ </section>
+ <div class="sc-5k4cja-0 eRqbRB">
+    <div type="section" class="HorizontalSpacer-sc-1ydfdlg-0 cGfig"></div>
+ </div>
+ <section class="sc-11wc0y8-0 cYOVSa">
+    <h2 class="StyledText-cx1xxi-0 kJffXN">Trip details</h2>
+    <div class="Spacer-sc-1yxs2dq-0 dBgzlX"></div>
+    <div class="Spacer-sc-1yxs2dq-0 dBgzlX"></div>
+    <div class="sc-3xhzn6-0 gjQpdy">
+       <div class="CoreUIFlexContainer-wee03o-0 gd6ndu-0 dcfgFa">
+          <svg class="line">
+             <defs>
+                <linearGradient id="map-point-line-gradient" gradientTransform="rotate(90)">
+                   <stop offset="0%" stop-color="#8B37FF"></stop>
+                   <stop offset="100%" stop-color="#DE00A7"></stop>
+                </linearGradient>
+             </defs>
+             <rect height="100%" fill="url(#map-point-line-gradient)"></rect>
+          </svg>
+       </div>
+       <div data-testid="container" aria-label="You'll be picked up from 1125 1st Ave. . " class="CoreUIFlexContainer-wee03o-0 sc-1knhqlv-0 iRTcKj">
+          <div style="width:80%" aria-hidden="true" class="CoreUIFlexContainer-wee03o-0 ddqtFs">
+             <div class="CoreUIFlexContainer-wee03o-0 sc-2su0gy-0 jYyIrs">
+                <span class="Span-sc-18fxrom-0 jjiqfF">
+                   <svg width="16" height="16" viewBox="0 0 16 16" style="fill:#8B37FF">
+                      <path d="M8 14A6 6 0 118 2a6 6 0 010 12zm0-4a2 2 0 100-4 2 2 0 000 4z"></path>
+                   </svg>
+                </span>
+             </div>
+             <div class="Spacer-sc-1yxs2dq-0 cNNLsu"></div>
+             <div title="Click to edit" class="sc-1knhqlv-2 bsvsgy">
+                <!-- <div data-testid="primary-address" class="sc-1knhqlv-1 fbpLxx">
+                   <div class="CoreUIFlexContainer-wee03o-0 gDTYrU"><span class="StyledText-cx1xxi-0 dhDozu">1125 1st Ave</span></div>
+                </div>
+                <div data-testid="secondary-address" class="sc-1knhqlv-1 fbpLxx"><span class="StyledText-cx1xxi-0 ddwhYo">Ronkonkoma, NY 11779, USA</span></div> -->
+             
+                <!-- <h1>Source</h1> -->
+                <div class="form-group"class="sc-1knhqlv-1 fbpLxx" >
+                  
+                    <div class="CoreUIFlexContainer-wee03o-0 gDTYrU"><span class="StyledText-cx1xxi-0 dhDozu"><input type="text" class="form-control" (keydown.enter)="$event.preventDefault()"
+                      placeholder="Search Source Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text"
+                      #sourceSearch></span></div>
+                </div>
+             
+              </div>
+             <div class="Spacer-sc-1yxs2dq-0 cNNLsu"></div>
+          </div>
+          <div aria-hidden="true" class="sc-1knhqlv-3 fNHJL">
+             <div><span class="StyledText-cx1xxi-0 biNBcr">Pick up</span></div>
+             <div><span data-testid="eta-time" class="StyledText-cx1xxi-0 ddwhYo"></span></div>
+          </div>
+       </div>
+       <div class="Spacer-sc-1yxs2dq-0 hgrdOs"></div>
+       <div data-testid="container" aria-label="You'll be dropped off at Boston. . " class="CoreUIFlexContainer-wee03o-0 sc-1knhqlv-0 iRTcKj">
+          <div style="width:80%" aria-hidden="true" class="CoreUIFlexContainer-wee03o-0 ddqtFs">
+             <div class="CoreUIFlexContainer-wee03o-0 sc-2su0gy-0 jYyIrs">
+                <span class="Span-sc-18fxrom-0 jjiqfF">
+                   <svg width="16" height="16" viewBox="0 0 16 16" style="fill:#DE00A7">
+                      <path d="M8 14A6 6 0 118 2a6 6 0 010 12zm0-4a2 2 0 100-4 2 2 0 000 4z"></path>
+                   </svg>
+                </span>
+             </div>
+             <div class="Spacer-sc-1yxs2dq-0 cNNLsu"></div>
+             <div title="Click to edit" class="sc-1knhqlv-2 bsvsgy">
+                <!-- <div data-testid="primary-address" class="sc-1knhqlv-1 fbpLxx">
+                   <div class="CoreUIFlexContainer-wee03o-0 gDTYrU"><span class="StyledText-cx1xxi-0 dhDozu">Boston</span></div>
+                </div>
+                <div data-testid="secondary-address" class="sc-1knhqlv-1 fbpLxx"><span class="StyledText-cx1xxi-0 ddwhYo">Boston, MA, USA</span></div>
+              -->
+
+              <!-- <h1>Destination</h1> -->
+              <div class="form-group"class="sc-1knhqlv-1 fbpLxx" >
+                  
+                <div class="CoreUIFlexContainer-wee03o-0 gDTYrU"><span class="StyledText-cx1xxi-0 dhDozu"><input type="text" class="form-control" (keydown.enter)="$event.preventDefault()"
+                  placeholder="Search Destination Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text"
+                  #destinationSearch></span></div>
+            </div>
+         
+          </div>
+
+             <div class="Spacer-sc-1yxs2dq-0 cNNLsu"></div>
+          </div>
+          <div aria-hidden="true" class="sc-1knhqlv-3 fNHJL">
+             <div><span class="StyledText-cx1xxi-0 biNBcr">Drop-off</span></div>
+             <div><span data-testid="eta-time" class="StyledText-cx1xxi-0 ddwhYo"></span></div>
+          </div>
+       </div>
+    </div>
+ </section>
+ <div class="sc-5k4cja-0 eRqbRB">
+    <div type="section" class="HorizontalSpacer-sc-1ydfdlg-0 cGfig"></div>
+ </div>
+ <section class="sc-11wc0y8-0 cYOVSa">
+    <h2 class="StyledText-cx1xxi-0 kJffXN">Payment</h2>
+    <div class="Spacer-sc-1yxs2dq-0 dBgzlX"></div>
+    <div class="sc-1xl8jzp-0 eWuLsG">
+       <div class="Spacer-sc-1yxs2dq-0 dBgzlX"></div>
+       <div class="CoreUIFlexContainer-wee03o-0 irpBmQ">
+          <span class="StyledText-cx1xxi-0 mboId">Total</span>
+          <div class="CoreUIFlexContainer-wee03o-0 bVmVMc"><span data-testid="main-price" class="StyledText-cx1xxi-0 bEIgvK">$300 - 320</span><span aria-hidden="true" class="StyledText-cx1xxi-0 ioKYNA"><span data-testid="crossed-price" style="text-decoration: line-through;"></span></span></div>
+       </div>
+       <div class="Spacer-sc-1yxs2dq-0 dBgzlX"></div>
+       <span class="StyledText-cx1xxi-0 dhDozu">This is an estimated range for your trip. <a href="https://account.lyft.com/?next=https%3A%2F%2Fride.lyft.com%2Fridetype%3Fentrypoint%3Dlyftcom%26referrer%3Dsingular_click_id%253D0f521b6c-2a9b-4959-a800-1613da464f75%26origin%3D40.789142%252C-73.13496099999999%26originName%3DLong%2BIsland%252C%2BNew%2BYork%252C%2BUS%26destination%3D42.3387933%252C-70.9745339%26destinationName%3DBoston%2BHarbor%252C%2BBoston%252C%2BMA%252C%2BUS%26offerProductId%3Dstandard&amp;v=riderweb" color="brandInteractive" class="ssqqsy-0 fvqPWA">Log in</a> or sign up to lock in your price and request a ride.</span>
+    </div>
+    <div class="Spacer-sc-1yxs2dq-0 hgrdOs"></div>
+    <div class="sc-1xl8jzp-0 eWuLsG"></div>
+ </section>
+ <div class="sc-5k4cja-0 eRqbRB">
+    <div type="section" class="HorizontalSpacer-sc-1ydfdlg-0 cGfig"></div>
+ </div>
+ <section class="sc-11wc0y8-0 cYOVSa">
+    <div class="sc-1bhrfsp-1 kFfKju">
+       <div class="CoreUIFlexContainer-wee03o-0 sc-1bhrfsp-0 ebEQA-d">
+          <span class="Span-sc-18fxrom-0 jjiqfF">
+             <svg width="16" height="16" viewBox="0 0 16 16" style="fill:var(--core-ui-theme-icon-primary,rgba(41,41,54,1))">
+                <path fill-rule="evenodd" d="M8 1c3.867 0 7 3.133 7 7s-3.133 7-7 7-7-3.133-7-7 3.133-7 7-7zm0 1.5A5.498 5.498 0 002.5 8c0 3.039 2.461 5.5 5.5 5.5s5.5-2.461 5.5-5.5S11.039 2.5 8 2.5zm-1 5h2v4H7v-4zm1-1.25a1.094 1.094 0 110-2.187A1.094 1.094 0 018 6.25z"></path>
+             </svg>
+          </span>
+          <div class="Spacer-sc-1yxs2dq-0 eUsusf"></div>
+          <span class="StyledText-cx1xxi-0 ddwhYo">We'll text your phone the latest updates about your ride.</span>
+       </div>
+    </div>
+ </section>
+ <div class="Spacer-sc-1yxs2dq-0 eQdPrd"></div>
+</div>
+</div>
+  
+  
+</div>
+
+<div class="c8rk2o-0 gMemPn">
+  <div class="Spacer-sc-1yxs2dq-0 hgrdOs"></div>
+  <a href="" class="ssqqsy-0 dXOLVv"><span class="ButtonWrapper-sc-11tiw4s-0 hyfbyd"><button type="button" class="BaseButton-sc-174wt3j-0 primaryButton-sc-174wt3j-1 primaryElevatedButton-sc-174wt3j-2 hZoYsO"><span class="FadeDuringLoading-aqyi1g-1 eCkYes"><span class="FadeChildren-aqyi1g-0 iDQjNz" data-core-ui-motion="quick-enter"><span class="MultilineTextWrap-sc-11tiw4s-1 kGcXot"><span class="StyledText-cx1xxi-0 BwsrF">Log in to request ride</span></span></span></span></button></span></a>
+  <div class="Spacer-sc-1yxs2dq-0 hgrdOs"></div>
+</div>
