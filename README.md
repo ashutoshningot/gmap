@@ -6,9 +6,8 @@ DEMO
 https://github.com/ashutoshningot/gmap/blob/master/Screenshot-web.png
 
 
-
-
-
+Error because google Maps api key needs to have billing account
+https://github.com/ashutoshningot/gmap/blob/master/Screensho-error.png
 
 
 
