@@ -6,7 +6,7 @@
     "@agm/core": "1.0.0",
     "@angular/common": "^10.0.4",
     "@angular/compiler": "^10.0.4",
-    "@angular/core": "^10.0.4",
+    "@angular/core": "^11.0.5",
     "@angular/forms": "^10.0.4",
     "@angular/localize": "^10.0.4",
     "@angular/platform-browser": "^10.0.4",
